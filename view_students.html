@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Students - Identity EdTech</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #eef2f7; }
+        .sidebar { width: 220px; height: 100vh; position: fixed; top: 0; left: 0; background: #1a56db; display: flex; flex-direction: column; }
+        .logo { padding: 22px 20px 18px; border-bottom: 1px solid rgba(255,255,255,0.15); }
+        .logo span { font-size: 16px; font-weight: 700; color: #fff; }
+        .logo small { display: block; font-size: 11px; color: rgba(255,255,255,0.6); margin-top: 3px; }
+        .sidebar a { display: block; padding: 13px 20px; color: rgba(255,255,255,0.85); text-decoration: none; font-size: 14px; border-left: 3px solid transparent; }
+        .sidebar a:hover { background: rgba(255,255,255,0.1); border-left-color: #fff; color: #fff; }
+        .sidebar a.logout { margin-top: auto; color: #fca5a5; border-top: 1px solid rgba(255,255,255,0.1); }
+        .sidebar a.logout:hover { background: rgba(220,38,38,0.2); }
+        .main { margin-left: 220px; padding: 28px; }
+        .page-title { font-size: 20px; font-weight: 700; color: #1e293b; margin-bottom: 20px; }
+        .card { background: #fff; border-radius: 10px; padding: 20px 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        thead th { background: #1a56db; color: #fff; padding: 11px 14px; text-align: left; font-weight: 600; }
+        tbody td { padding: 10px 14px; border-bottom: 1px solid #f1f5f9; }
+        tbody tr:hover { background: #f8fafc; }
+        p.empty { color: #94a3b8; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <span>🎓 Identity EdTech</span>
+            <small>Teacher Portal</small>
+        </div>
+        <a href="/teacher_dashboard">🏠 Dashboard</a>
+        <a href="/view_students">👥 View Students</a>
+        <a href="/upload_material">📤 Upload Material</a>
+        <a href="/view_materials">📂 View Materials</a>
+        <a href="/logout" class="logout">🚪 Logout</a>
+    </div>
+
+    <div class="main">
+        <div class="page-title">👥 Student List</div>
+        <div class="card">
+            {% if students %}
+            <table>
+                <thead>
+                    <tr><th>ID</th><th>Name</th><th>Email</th></tr>
+                </thead>
+                <tbody>
+                    {% for s in students %}
+                    <tr>
+                        <td>{{ s.id }}</td>
+                        <td>{{ s.name }}</td>
+                        <td>{{ s.email }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p class="empty">No students registered yet.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

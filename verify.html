@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OTP Verification - Identity EdTech</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #eef2f7; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+        .card { background: #fff; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); padding: 40px 36px; width: 100%; max-width: 380px; text-align: center; }
+        .icon { font-size: 48px; margin-bottom: 16px; }
+        h2 { font-size: 20px; font-weight: 700; color: #1e293b; margin-bottom: 8px; }
+        .sub { font-size: 13px; color: #64748b; margin-bottom: 28px; line-height: 1.6; }
+        .fg { margin-bottom: 16px; text-align: left; }
+        label { display: block; font-size: 13px; font-weight: 600; color: #555; margin-bottom: 5px; }
+        input { width: 100%; padding: 12px 14px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 20px; text-align: center; letter-spacing: 6px; background: #f9fafb; }
+        input:focus { outline: none; border-color: #1a56db; background: #fff; }
+        .btn { width: 100%; padding: 11px; background: #1a56db; color: white; border: none; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; }
+        .btn:hover { background: #1648c0; }
+        .error { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; border-radius: 8px; padding: 10px; font-size: 13px; margin-bottom: 16px; }
+        .back { margin-top: 16px; font-size: 13px; color: #64748b; }
+        .back a { color: #1a56db; text-decoration: none; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="icon">📧</div>
+        <h2>Check Your Email</h2>
+        <p class="sub">We sent a 6-digit OTP to your registered email address. It expires in 5 minutes.</p>
+
+        {% if error %}
+        <div class="error">{{ error }}</div>
+        {% endif %}
+
+        <form action="/verify_otp" method="POST">
+            <div class="fg">
+                <label>Enter OTP</label>
+                <input type="text" name="otp" placeholder="000000" maxlength="6" required autofocus>
+            </div>
+            <button class="btn" type="submit">Verify OTP</button>
+        </form>
+
+        <p class="back"><a href="/login">← Back to Login</a></p>
+    </div>
+</body>
+</html>

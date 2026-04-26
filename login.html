@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Identity EdTech</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #eef2f7; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+        .card { background: #fff; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); padding: 40px 36px; width: 100%; max-width: 400px; }
+        .brand { text-align: center; margin-bottom: 28px; }
+        .brand h1 { font-size: 20px; color: #1a56db; font-weight: 700; }
+        .brand p { font-size: 13px; color: #888; margin-top: 4px; }
+        h2 { font-size: 18px; font-weight: 600; margin-bottom: 22px; text-align: center; color: #1e293b; }
+        .fg { margin-bottom: 15px; }
+        label { display: block; font-size: 13px; font-weight: 600; color: #555; margin-bottom: 5px; }
+        input, select { width: 100%; padding: 10px 13px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px; background: #f9fafb; }
+        input:focus, select:focus { outline: none; border-color: #1a56db; background: #fff; }
+        .btn { width: 100%; padding: 11px; background: #1a56db; color: white; border: none; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; margin-top: 6px; }
+        .btn:hover { background: #1648c0; }
+        .error { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; border-radius: 8px; padding: 10px; font-size: 13px; margin-bottom: 14px; text-align: center; }
+        .footer { text-align: center; margin-top: 18px; font-size: 13px; color: #666; }
+        .footer a { color: #1a56db; text-decoration: none; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="brand">
+            <h1>🎓 Identity EdTech</h1>
+            <p>Secure Learning Platform</p>
+        </div>
+        <h2>Sign In</h2>
+
+        {% if error %}
+        <div class="error">{{ error }}</div>
+        {% endif %}
+
+        <form action="/login" method="POST">
+            <div class="fg">
+                <label>Role</label>
+                <select name="role" required>
+                    <option value="">-- Select Role --</option>
+                    <option value="admin">Admin</option>
+                    <option value="student">Student</option>
+                    <option value="teacher">Teacher</option>
+                </select>
+            </div>
+            <div class="fg">
+                <label>Campus ID / User ID</label>
+                <input type="text" name="user_id" placeholder="Enter your ID" required>
+            </div>
+            <div class="fg">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="Enter your password" required>
+            </div>
+            <button class="btn" type="submit">Login</button>
+        </form>
+
+        <div class="footer">
+            Don't have an account? <a href="/signup">Sign Up</a>
+        </div>
+    </div>
+</body>
+</html>

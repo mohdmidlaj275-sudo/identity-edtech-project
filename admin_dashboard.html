@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard - Identity EdTech</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #eef2f7; }
+        .sidebar { width: 220px; height: 100vh; position: fixed; top: 0; left: 0; background: #1e293b; display: flex; flex-direction: column; }
+        .logo { padding: 22px 20px 18px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .logo span { font-size: 16px; font-weight: 700; color: #fff; }
+        .logo small { display: block; font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 3px; }
+        .sidebar a { display: block; padding: 13px 20px; color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; border-left: 3px solid transparent; }
+        .sidebar a:hover { background: rgba(255,255,255,0.08); border-left-color: #60a5fa; color: #fff; }
+        .sidebar a.logout { margin-top: auto; color: #fca5a5; border-top: 1px solid rgba(255,255,255,0.08); }
+        .sidebar a.logout:hover { background: rgba(220,38,38,0.2); }
+        .main { margin-left: 220px; padding: 28px; }
+        .page-title { font-size: 20px; font-weight: 700; color: #1e293b; margin-bottom: 20px; }
+        .card { background: #fff; border-radius: 10px; padding: 20px 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); margin-bottom: 20px; }
+        .card h3 { font-size: 15px; font-weight: 600; color: #1e293b; margin-bottom: 16px; }
+        table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        thead th { background: #1e293b; color: #fff; padding: 11px 14px; text-align: left; font-weight: 600; }
+        tbody td { padding: 10px 14px; border-bottom: 1px solid #f1f5f9; }
+        tbody tr:hover { background: #f8fafc; }
+        .badge { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+        .badge-login { background: #dbeafe; color: #1d4ed8; }
+        .badge-signup { background: #dcfce7; color: #15803d; }
+        .badge-success { background: #dcfce7; color: #15803d; }
+        .badge-fail { background: #fee2e2; color: #dc2626; }
+        .btn-link { display: inline-block; padding: 7px 16px; background: #1a56db; color: white; text-decoration: none; border-radius: 7px; font-size: 13px; font-weight: 600; }
+        .btn-link:hover { background: #1648c0; }
+        p.empty { color: #94a3b8; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <span>🎓 Identity EdTech</span>
+            <small>Admin Panel</small>
+        </div>
+        <a href="/admin_dashboard">📊 Dashboard</a>
+        <a href="/manage_users">👥 Manage Users</a>
+        <a href="/logout" class="logout">🚪 Logout</a>
+    </div>
+
+    <div class="main">
+        <div class="page-title">📊 Admin Dashboard</div>
+
+        <div class="card">
+            <h3>🔍 Audit Logs</h3>
+            {% if logs %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>User ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Action</th>
+                        <th>Status</th>
+                        <th>Timestamp</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for log in logs %}
+                    <tr>
+                        <td>{{ log.id }}</td>
+                        <td>{{ log.user_id }}</td>
+                        <td>{{ log.name }}</td>
+                        <td>{{ log.email }}</td>
+                        <td>{{ log.role }}</td>
+                        <td>
+                            <span class="badge badge-{{ log.action }}">{{ log.action }}</span>
+                        </td>
+                        <td>
+                            <span class="badge badge-{{ log.status }}">{{ log.status }}</span>
+                        </td>
+                        <td>{{ log.timestamp }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p class="empty">No audit logs yet.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
